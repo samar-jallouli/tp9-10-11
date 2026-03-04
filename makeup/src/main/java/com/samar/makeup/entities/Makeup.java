@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Makeup {
@@ -18,9 +19,11 @@ public class Makeup {
 	private Double prixMakeup;
 	private Date dateCreation;
 	
+	@ManyToOne
+	private Brand brand;
+	
 	public Makeup() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	
@@ -65,6 +68,18 @@ public class Makeup {
 	public String toString() {
 		return "Makeup [idMakeup=" + idMakeup + ", nomMakeup=" + nomMakeup + ", prixMakeup=" + prixMakeup
 				+ ", dateCreation=" + dateCreation + "]";
+	}
+
+
+
+	public Brand getBrand() {
+		return brand;
+	}
+
+
+
+	public void setBrand(Brand brand) {
+		this.brand = brand;
 	}
 	
 	

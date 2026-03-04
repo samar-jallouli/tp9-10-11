@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,11 +18,16 @@ public class MakeupController {
 @Autowired
 MakeupService makeupService;
  @RequestMapping("/ListeMakeup")
-public String listeMakeup(ModelMap modelMap)
+public String listeMakeup(ModelMap modelMap,
+		@RequestParam (name="page",defaultValue = "0") int page,
+		@RequestParam (name="size", defaultValue = "2") int size)
 {
-List<Makeup> mak = makeupService.getAllMakeup();
-modelMap.addAttribute("makeup", mak);
-return "listeMakeup";
+	Page<Makeup> mak = makeupService.getAllMakeupParPage(page, size);
+	modelMap.addAttribute("makeup", mak);
+	modelMap.addAttribute("pages", new int[mak.getTotalPages()]);
+	modelMap.addAttribute("currentPage", page);
+	
+	return "listeMakeup";
 }
  @RequestMapping("/showCreate")
 public String showCreate()
@@ -31,8 +37,7 @@ return "createMakeup";
 @RequestMapping("/saveMakeup")
 public String saveMakeup(@ModelAttribute("makeup") Makeup makeup,
 @RequestParam("date") String date,
-ModelMap modelMap) throws ParseException
-{
+ModelMap modelMap) throws ParseException{
 //conversion de la date
  SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
  Date dateCreation = dateformat.parse(String.valueOf(date));
@@ -44,13 +49,19 @@ modelMap.addAttribute("msg", msg);
 return "createMakeup";
 }
 @RequestMapping("/supprimerMakeup")
-public String supprimerMakeup(@RequestParam("id") Long id,
- ModelMap modelMap)
+public String supprimerMakeup(@RequestParam("id") Long id,ModelMap modelMap,
+		@RequestParam (name="page",defaultValue = "0") int page,
+		@RequestParam (name="size", defaultValue = "2") int size)
+ 
 {
 makeupService.deleteMakeupById(id);
-List<Makeup> mak = makeupService.getAllMakeup();
-modelMap.addAttribute("makeups", mak);
-return "listeMakeups";
+Page<Makeup> mak = makeupService.getAllMakeupParPage(page,size);
+		modelMap.addAttribute("makeup", mak);
+		modelMap.addAttribute("pages", new int[mak.getTotalPages()]);
+		modelMap.addAttribute("currentPage", page);
+		modelMap.addAttribute("size", size);
+		return "listeMakeup";
+
 }
 
  @RequestMapping("/modifierMakeup")
