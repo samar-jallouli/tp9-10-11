@@ -22,7 +22,7 @@ public interface MakeupService {
 	List<Makeup> findByBrandIdB(Long id);
 	List<Makeup> findByOrderByNomMakeupAsc();
 	List<Makeup> trierMakeupNomsPrix();
-
+	List<Brand> getAllBrands();
 	
 	
 	Page<Makeup> getAllMakeupParPage(int page, int size);

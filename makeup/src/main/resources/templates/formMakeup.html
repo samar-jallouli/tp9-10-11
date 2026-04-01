@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" />
+<head>
+    <meta charset="utf-8">
+    <title>Formulaire Makeup</title>
+</head>
+<body>
+<div th:replace="template"></div>
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header" th:if="${mode=='new'}">Ajout Makeup</div>
+        <div class="card-header" th:if="${mode=='edit'}">Modification Makeup</div>
+        <div class="card-body">
+            <form th:action="@{saveMakeup}" method="post">
+
+                <div class="form-group">
+                    <label class="control-label" hidden>ID :</label>
+                    <input type="hidden" name="idMakeup" class="form-control"
+                           th:value="${makeup.idMakeup}" />
+                </div>
+
+                <input type="hidden" name="page" th:value="${page}" />
+                <input type="hidden" name="size" th:value="${size}" />
+
+                <div class="form-group">
+                    <label class="control-label">Nom Makeup :</label>
+                    <input type="text" name="nomMakeup" class="form-control"
+                           th:value="${makeup.nomMakeup}" />
+                    <span th:errors="${makeup.nomMakeup}" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Prix Makeup :</label>
+                    <input type="text" name="prixMakeup" class="form-control"
+                           th:value="${makeup.prixMakeup}" />
+                    <span th:errors="${makeup.prixMakeup}" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Date Création :</label>
+                    <input type="date" name="dateCreation" class="form-control"
+                           th:value="${makeup.dateCreation}" />
+                    <span th:errors="${makeup.dateCreation}" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label">Brand :</label>
+                    <select name="brand" class="form-control"
+                            th:if="${!#strings.isEmpty(makeup.brand)}">
+                        <option th:each="b:${brands}" th:if="${mode=='edit'}"
+                                th:value="${b.idB}" th:text="${b.nomB}"
+                                th:selected="${b.idB == makeup.brand.idB}">
+                        </option>
+                    </select>
+                    <select name="brand" class="form-control"
+                            th:if="${#strings.isEmpty(makeup.brand)}">
+                        <option th:each="b:${brands}"
+                                th:value="${b.idB}" th:text="${b.nomB}">
+                        </option>
+                    </select>
+                </div>
+
+                <div>
+                    <button type="submit" class="btn btn-primary"
+                            th:if="${mode=='new'}">Ajouter</button>
+                    <button type="submit" class="btn btn-warning"
+                            th:if="${mode=='edit'}">Modifier</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

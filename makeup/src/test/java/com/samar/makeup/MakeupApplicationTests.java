@@ -93,7 +93,7 @@ class MakeupApplicationTests {
 		@Test
 		public void testfindByNomPrix()
 		{
-		List<Makeup> mak = makeupRepository.findByNomPrix("gloss", 22.5);
+		List<Makeup> mak = makeupRepository.findByNomPrix("%mascara%", 55.6);
 		for (Makeup m : mak)
 		{
 		System.out.println(m);

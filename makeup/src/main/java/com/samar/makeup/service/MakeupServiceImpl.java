@@ -6,14 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-
 import com.samar.makeup.entities.Brand;
 import com.samar.makeup.entities.Makeup;
+import com.samar.makeup.repos.BrandRepository;
 import com.samar.makeup.repos.MakeupRepository;
 
 @Service
 public class MakeupServiceImpl implements MakeupService {
 
+	@Autowired
+	BrandRepository brandRepository;
+	
 	@Autowired
 	MakeupRepository makeupRepository;
 	
@@ -85,8 +88,13 @@ public class MakeupServiceImpl implements MakeupService {
 	}
 
 	@Override
-	public List<Makeup> trierMakeupNomsPrix() {
-		return makeupRepository.trierMakeupNomsPrix();
-	}
+    public List<Makeup> trierMakeupNomsPrix() {
+        return makeupRepository.trierMakeupNomsPrix();
+    }
+
+    @Override
+    public List<Brand> getAllBrands() {
+        return brandRepository.findAll();
+    }
 
 }
