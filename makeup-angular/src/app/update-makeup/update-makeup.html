@@ -1,0 +1,43 @@
+<div class="container mt-4">
+  <div class="card shadow mb-4">
+    <div class="card-header">
+      <h2>Modifier un Makeup :</h2>
+    </div>
+    <div class="card-body">
+      <form>
+        <div hidden class="col-sm-2 col-md-2 col-lg-2 mb-2">
+          <label>ID Makeup</label>
+          <input type="text" [(ngModel)]="currentMakeup.idMakeup"
+            name="idMakeup" class="form-control">
+        </div>
+        <div class="col-sm-2 col-md-2 col-lg-2 mb-2">
+          <label>ID Makeup</label>
+          <input readonly type="text" [(ngModel)]="currentMakeup.idMakeup"
+            name="idMakeupReadOnly" class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4 mb-2">
+          <label>Nom Makeup</label>
+          <input type="text" [(ngModel)]="currentMakeup.nomMakeup"
+            name="nomMakeup" class="form-control">
+        </div>
+        <div class="col-sm-2 col-md-2 col-lg-2 mb-2">
+          <label>Prix Makeup</label>
+          <input type="number" [(ngModel)]="currentMakeup.prixMakeup"
+            name="prixMakeup" class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4 mb-2">
+          <label>Date Création</label>
+          <input type="date"
+            [ngModel]="currentMakeup.dateCreation | date:'yyyy-MM-dd'"
+            (ngModelChange)="currentMakeup.dateCreation = $event"
+            name="dateCreation" class="form-control">
+        </div>
+        <div class="mt-2">
+          <button type="submit" (click)="updateMakeup()" class="btn btn-success">
+            Modifier
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

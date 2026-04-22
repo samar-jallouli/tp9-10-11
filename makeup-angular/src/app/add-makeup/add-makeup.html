@@ -1,0 +1,36 @@
+<div class="container mt-4">
+  <div class="card shadow mb-4">
+    <div class="card-header">
+      <h2>Ajouter un Makeup :</h2>
+    </div>
+    <div class="card-body">
+      <form>
+        <div class="col-sm-2 col-md-2 col-lg-2 mb-2">
+          <label>ID Makeup</label>
+          <input type="text" [(ngModel)]="newMakeup.idMakeup"
+            name="idMakeup" class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4 mb-2">
+          <label>Nom Makeup</label>
+          <input type="text" [(ngModel)]="newMakeup.nomMakeup"
+            name="nomMakeup" class="form-control">
+        </div>
+        <div class="col-sm-2 col-md-2 col-lg-2 mb-2">
+          <label>Prix Makeup</label>
+          <input type="number" [(ngModel)]="newMakeup.prixMakeup"
+            name="prixMakeup" class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4 mb-2">
+          <label>Date Création</label>
+          <input type="date" [(ngModel)]="newMakeup.dateCreation"
+            name="dateCreation" class="form-control">
+        </div>
+        <div class="mt-2">
+          <button type="submit" (click)="addMakeup()" class="btn btn-success">
+            Ajouter
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

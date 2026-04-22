@@ -1,0 +1,13 @@
+
+<h2>{{ titre }}</h2>
+<p>{{ 2 + 3 }}</p>
+<p>{{ 'Bonjour ' + titre }}</p>
+
+
+<button [disabled]="status">Bouton désactivé</button>
+
+
+<input [(ngModel)]="titre" />
+<p>Titre saisi : {{ titre }}</p>
+
+<button (click)="changerTitre()">Changer Titre</button>

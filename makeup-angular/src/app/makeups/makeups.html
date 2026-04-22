@@ -1,0 +1,39 @@
+<div class="container mt-4">
+  <div class="card shadow mb-4">
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>N°</th>
+            <th>Id</th>
+            <th>Nom</th>
+            <th>Prix</th>
+            <th>Date Création</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        @for (makeup of makeups; track makeup.idMakeup; let index = $index; let nbr = $count; let first = $first) {
+          @if(first) {
+            <tr><td colspan="6"><strong>Nombre total : {{ nbr }}</strong></td></tr>
+          }
+          <tbody>
+            <tr>
+              <td>{{ index }}</td>
+              <td>{{ makeup.idMakeup }}</td>
+              <td>{{ makeup.nomMakeup }}</td>
+              <td>{{ makeup.prixMakeup }}</td>
+              <td>{{ makeup.dateCreation | date:'dd/MM/yyyy' }}</td>
+              <td>
+                   <a class="btn btn-success me-2" [routerLink]="['/updateMakeup', makeup.idMakeup]">Modifier</a>
+                   <a class="btn btn-danger" (click)="supprimerMakeup(makeup)">Supprimer</a>
+                </td>
+            </tr>
+          </tbody>
+        }
+        @empty {
+          <tr><td colspan="6"><h5>Aucun makeup trouvé !</h5></td></tr>
+        }
+      </table>
+    </div>
+  </div>
+</div>
